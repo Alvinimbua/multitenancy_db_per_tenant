@@ -1,0 +1,89 @@
+databaseChangeLog:
+  - changeSet:
+      id: item
+      author: alvin
+      changes:
+        - createTable:
+            tableName: item
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: branch_pkey
+              - column:
+                  name: version
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                  defaultValue: "0"
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#databaseChangeLog:
+#  - changeSet:
+#      id: create-item-table
+#      author: alvin
+#      preConditions:
+#        - onFail: ALVIN_RAN
+#          not:
+#            - tableExists:
+#                tableName: item
+#      changes:
+#        - createTable:
+#            tableName: item
+#            columns:
+#              - column:
+#                  name: id
+#                  type: VARCHAR(36)
+#                  constraints:
+#                    primaryKey: true
+#                    nullable: false
+#              - column:
+#                  name: version
+#                  type: bigint
+#              - column:
+#                  name: itemId
+#                  type: varchar(36)
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: name
+#                  type: varchar(50)
+#                  constraints:
+#                    nullable: false
+#        - addUniqueConstraint:
+#            tableName: item
+#            columnNames: itemId
+#            constraintName: udx_item
+#  - changeSet:
+#      id: add-tenant-id-to-item-table
+#      author: alvin
+#      changes:
+#        - addColumn:
+#            tableName: item
+#            columns:
+#              - column:
+#                  name: tenantId
+#                  type: varchar(30)
+#                  defaultValue: "0"
+#                  constraints:
+#                    nullable: false

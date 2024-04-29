@@ -1,0 +1,34 @@
+databaseName: database_per_tenant
+server:
+  port: 8088
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+multitenancy:
+  master:
+    datasource:
+      url: jdbc:postgresql://localhost:5432/database_per_tenant
+      username: postgres
+      password: Smart2024
+    liquibase:
+      changeLog: classpath:db/changelog/db.changelog-master.yaml
+  tenant:
+    datasource:
+      url-prefix: jdbc:postgresql://localhost:5432/
+    liquibase:
+      changeLog: classpath:db/changelog/db.changelog-tenant.yaml
+
+encryption:
+  secret: verySecret
+  salt: f1nd1ngn3m0
+
+
+
+
+
+

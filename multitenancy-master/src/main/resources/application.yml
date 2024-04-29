@@ -1,0 +1,54 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: public
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+
+multitenancy:
+  datasource-cache:
+    maximumSize: 100
+    expireAfterAccess: 10
+  master:
+    repository:
+      packages: com.imbuka.database_per_tenant.multitenancy
+    entityManager:
+      packages: com.imbuka.database_per_tenant.multitenancy
+    datasource:
+      url: jdbc:postgresql://localhost:5432/database_per_tenant
+      username: postgres
+      password: Smart2024
+    schema: public
+    liquibase:
+      enabled: false
+  tenant:
+    repository:
+      packages: com.imbuka.database_per_tenant.repository
+    entityManager:
+      packages: com.imbuka.database_per_tenant.entity
+    datasource:
+      url-prefix: jdbc:postgresql://localhost:5432/
+      hikari:
+        maximumPoolSize: 2
+        minimumIdle: 0
+        idleTimeout: 30000
+    liquibase:
+      changeLog: classpath:db/changelog/db.changelog-tenant.yaml
+      enabled: false
+encryption:
+  secret: verySecret
+  salt: f1nd1ngn3m0
+
+server:
+  port: 8181
+  servlet:
+    context-path: /
+
+
+
+
+
+

@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: item
+      author: alvin
+      changes:
+        - createTable:
+            tableName: item
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: branch_pkey
+              - column:
+                  name: version
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                  defaultValueNumeric: 0
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        - sql:
+            dbms: 'postgresql'
+            sql: >-
+              ALTER SEQUENCE item_id_seq RESTART WITH 100000;
+
+
+
+
+
+
+
